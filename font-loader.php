@@ -13,13 +13,17 @@ defined( 'ABSPATH' ) or exit( 'No script kiddies please!' );
 
 class FontLoader {
 	public function __construct() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_fonts_folder' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_fonts_folder' ), 1000);
 	}
 
 	function enqueue_fonts_folder() {
 		$fontPath = plugin_dir_url( __FILE__ ) . 'css/fonts.css';
 
 		wp_enqueue_style( 'font-css', $fontPath );
+
+		wp_dequeue_style('divi-fonts');
+		wp_dequeue_style('et-gf-lato');
+		wp_dequeue_style('tt-easy-google-fonts');
 
 	}
 }
